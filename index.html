@@ -6,6 +6,41 @@
   <title>For You, Always 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    #lock-screen {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: white;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    #lock-screen input {
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      font-size: 1rem;
+    }
+
+    #lock-screen button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      background: #f06292;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #lock-screen button:hover {
+      background: #e91e63;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -88,180 +123,55 @@
   </style>
 </head>
 <body>
-  <h1>💖 Always Here for You</h1>
-  <div class="grid">
-    <a href="pages/sad.html">
-      <div class="card">
-        <div class="emoji">💧</div>
-        <h3>I'm Feeling Sad</h3>
-        <p>Comforting messages and soft music.</p>
-      </div>
-    </a>
-
-    <a href="pages/angry.html">
-      <div class="card">
-        <div class="emoji">😡</div>
-        <h3>I'm Angry</h3>
-        <p>Rant space, calm video, words to breathe.</p>
-      </div>
-    </a>
-
-    <a href="pages/miss.html">
-      <div class="card">
-        <div class="emoji">😢</div>
-        <h3>I Miss You</h3>
-        <p>Countdown, songs, and your love note.</p>
-      </div>
-    </a>
-
-    <a href="pages/happy.html">
-      <div class="card">
-        <div class="emoji">😄</div>
-        <h3>I'm Happy!</h3>
-        <p>Celebrate moments with joy & confetti!</p>
-      </div>
-    </a>
-
-    <a href="pages/achievement.html">
-      <div class="card">
-        <div class="emoji">🏆</div>
-        <h3>I Did It!</h3>
-        <p>Fireworks, praise, and your cheer squad.</p>
-      </div>
-    </a>
-
-    <a href="pages/sleep.html">
-      <div class="card">
-        <div class="emoji">💤</div>
-        <h3>I Can't Sleep</h3>
-        <p>Lullabies or your voice — sweet dreams.</p>
-      </div>
-    </a>
-
-    <a href="pages/hug.html">
-      <div class="card">
-        <div class="emoji">🫂</div>
-        <h3>I Need a Hug</h3>
-        <p>Virtual hugs and warm messages.</p>
-      </div>
-    </a>
-
-    <a href="pages/anxious.html">
-      <div class="card">
-        <div class="emoji">🌩️</div>
-        <h3>I Feel Anxious</h3>
-        <p>Breathing tools and grounding support.</p>
-      </div>
-    </a>
-
-    <a href="pages/memories.html">
-      <div class="card">
-        <div class="emoji">📖</div>
-        <h3>Remember When?</h3>
-        <p>Our scrapbook of shared love.</p>
-      </div>
-    </a>
-
-    <a href="pages/graduation.html">
-      <div class="card">
-        <div class="emoji">🎓</div>
-        <h3>Graduation</h3>
-        <p>Celebrating your journey and growth.</p>
-      </div>
-    </a>
-
-    <a href="pages/birthday.html">
-      <div class="card">
-        <div class="emoji">🎂</div>
-        <h3>Birthday</h3>
-        <p>Secret message and video gift.</p>
-      </div>
-    </a>
-
-    <a href="pages/anniversary.html">
-      <div class="card">
-        <div class="emoji">🗓️</div>
-        <h3>Anniversary</h3>
-        <p>Reflection, joy, and sweet promises.</p>
-      </div>
-    </a>
-
-    <a href="pages/holiday.html">
-      <div class="card">
-        <div class="emoji">🎄</div>
-        <h3>Holiday Page</h3>
-        <p>Seasonal love messages for you.</p>
-      </div>
-    </a>
-
-    <a href="pages/future.html">
-      <div class="card">
-        <div class="emoji">🌟</div>
-        <h3>Future You</h3>
-        <p>Letter to your future, filled with hope.</p>
-      </div>
-    </a>
-
-    <a href="pages/guessing.html">
-      <div class="card">
-        <div class="emoji">❓</div>
-        <h3>Guessing Game</h3>
-        <p>Guess cute memories & moments.</p>
-      </div>
-    </a>
-
-    <a href="pages/open-when.html">
-      <div class="card">
-        <div class="emoji">💌</div>
-        <h3>Open When Letters</h3>
-        <p>Letters for every feeling or need.</p>
-      </div>
-    </a>
-
-    <a href="pages/memory-game.html">
-      <div class="card">
-        <div class="emoji">🧠</div>
-        <h3>Memory Game</h3>
-        <p>Match our magical moments.</p>
-      </div>
-    </a>
-
-    <a href="pages/mini-games.html">
-      <div class="card">
-        <div class="emoji">🕹️</div>
-        <h3>Mini Games</h3>
-        <p>Tic-tac-toe, maze, or trivia love!</p>
-      </div>
-    </a>
-
-    <a href="pages/travel.html">
-      <div class="card">
-        <div class="emoji">🌍</div>
-        <h3>Travel Dreams</h3>
-        <p>Pin places we dream of visiting.</p>
-      </div>
-    </a>
-
-    <a href="pages/playlist.html">
-      <div class="card">
-        <div class="emoji">🎵</div>
-        <h3>Shared Playlist</h3>
-        <p>Our songs, our story, our love.</p>
-      </div>
-    </a>
-
-    <a href="pages/advice.html">
-      <div class="card">
-        <div class="emoji">🧭</div>
-        <h3>Advice Box</h3>
-        <p>Pull quotes & love-guided advice.</p>
-      </div>
-    </a>
+  <div id="lock-screen">
+    <h2>🔒 Enter Password to Continue</h2>
+    <input type="password" id="passwordInput" placeholder="Enter password...">
+    <button onclick="checkPassword()">Enter</button>
+    <p id="error" style="color: red; margin-top: 10px;"></p>
   </div>
 
-  <footer>
-    Made with 💗 just for you — from your person.
-  </footer>
+  <div id="page-content" style="display: none;">
+    <h1>💖 Always Here for You</h1>
+    <div class="grid">
+      <a href="pages/sad.html"><div class="card"><div class="emoji">💧</div><h3>I'm Feeling Sad</h3><p>Comforting messages and soft music.</p></div></a>
+      <a href="pages/angry.html"><div class="card"><div class="emoji">😡</div><h3>I'm Angry</h3><p>Rant space, calm video, words to breathe.</p></div></a>
+      <a href="pages/miss.html"><div class="card"><div class="emoji">😢</div><h3>I Miss You</h3><p>Countdown, songs, and your love note.</p></div></a>
+      <a href="pages/happy.html"><div class="card"><div class="emoji">😄</div><h3>I'm Happy!</h3><p>Celebrate moments with joy & confetti!</p></div></a>
+      <a href="pages/achievement.html"><div class="card"><div class="emoji">🏆</div><h3>I Did It!</h3><p>Fireworks, praise, and your cheer squad.</p></div></a>
+      <a href="pages/sleep.html"><div class="card"><div class="emoji">💤</div><h3>I Can't Sleep</h3><p>Lullabies or your voice — sweet dreams.</p></div></a>
+      <a href="pages/hug.html"><div class="card"><div class="emoji">🫂</div><h3>I Need a Hug</h3><p>Virtual hugs and warm messages.</p></div></a>
+      <a href="pages/anxious.html"><div class="card"><div class="emoji">🌩️</div><h3>I Feel Anxious</h3><p>Breathing tools and grounding support.</p></div></a>
+      <a href="pages/memories.html"><div class="card"><div class="emoji">📖</div><h3>Remember When?</h3><p>Our scrapbook of shared love.</p></div></a>
+      <a href="pages/graduation.html"><div class="card"><div class="emoji">🎓</div><h3>Graduation</h3><p>Celebrating your journey and growth.</p></div></a>
+      <a href="pages/birthday.html"><div class="card"><div class="emoji">🎂</div><h3>Birthday</h3><p>Secret message and video gift.</p></div></a>
+      <a href="pages/anniversary.html"><div class="card"><div class="emoji">🗓️</div><h3>Anniversary</h3><p>Reflection, joy, and sweet promises.</p></div></a>
+      <a href="pages/holiday.html"><div class="card"><div class="emoji">🎄</div><h3>Holiday Page</h3><p>Seasonal love messages for you.</p></div></a>
+      <a href="pages/future.html"><div class="card"><div class="emoji">🌟</div><h3>Future You</h3><p>Letter to your future, filled with hope.</p></div></a>
+      <a href="pages/guessing.html"><div class="card"><div class="emoji">❓</div><h3>Guessing Game</h3><p>Guess cute memories & moments.</p></div></a>
+      <a href="pages/open-when.html"><div class="card"><div class="emoji">💌</div><h3>Open When Letters</h3><p>Letters for every feeling or need.</p></div></a>
+      <a href="pages/memory-game.html"><div class="card"><div class="emoji">🧠</div><h3>Memory Game</h3><p>Match our magical moments.</p></div></a>
+      <a href="pages/mini-games.html"><div class="card"><div class="emoji">🕹️</div><h3>Mini Games</h3><p>Tic-tac-toe, maze, or trivia love!</p></div></a>
+      <a href="pages/travel.html"><div class="card"><div class="emoji">🌍</div><h3>Travel Dreams</h3><p>Pin places we dream of visiting.</p></div></a>
+      <a href="pages/playlist.html"><div class="card"><div class="emoji">🎵</div><h3>Shared Playlist</h3><p>Our songs, our story, our love.</p></div></a>
+      <a href="pages/advice.html"><div class="card"><div class="emoji">🧭</div><h3>Advice Box</h3><p>Pull quotes & love-guided advice.</p></div></a>
+    </div>
+    <footer>
+      Made with 💗 just for you — from your person.
+    </footer>
+  </div>
+
+  <script>
+    const correctPassword = "patience";
+
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      if (input === correctPassword) {
+        document.getElementById("lock-screen").style.display = "none";
+        document.getElementById("page-content").style.display = "block";
+      } else {
+        document.getElementById("error").innerText = "Incorrect password. Try again.";
+      }
+    }
+  </script>
 </body>
 </html>
-
