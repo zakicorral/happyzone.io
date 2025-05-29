@@ -1,291 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>For You, Always</title>
- <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="style <style>
- body {
- font-family: 'Dancing Script', cursive;
- background: linear-gradient(#fce4ec, #f8bbd0);
- color: #4a148c;
- display: flex;
- justify-content: center;
- align-items: center;
- height: 100vh;
- margin: 0;
- text-align: center;
- }
- .container {
- background: white;
- padding: 2rem;
- border-radius: 2rem;
- box-shadow: 0 0 15px rgba(0,0,0,0.2);
- width: 90%;
- max-width: 500px;
- }
- input[type="password"] {
- padding: 0.5rem;
- border: 2px solid #ce93d8;
- border-radius: 1rem;
- font-size: 1rem;
- margin-top: 1rem;
- }
- button {
- margin-top: 1rem;
- padding: 0.5rem 1rem;
- font-size: 1rem;
- background-color: #ba68c8;
- color: white;
- border: none;
- border-radius: 1rem;
- cursor: pointer;
- }
- button:hover {
- background-color: #ab47bc;
- }
- </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You, Always 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+      animation: fadeInUp 2s ease-in-out;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .emoji {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      transition: transform 0.4s;
+    }
+
+    .card:hover .emoji {
+      transform: scale(1.2);
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
 </head>
 <body>
- <div class="container">
- <h1>Hi love,</h1>
- <p>Enter your secret code to access your world of memories ?</p>
- <input type="password" id="pass" placeholder="Enter your secret..." />
- <br />
- <button onclick="checkPass()">Enter</button>
- </div>
- <script>
- function checkPass() {
- const correct = "forever";
- const input = document.getElementById("pass").value;
- if (input.toLowerCase() === correct) {
- window.location.href = "dashboard.html";
- } else {
- alert("Wrong code, try again sweetheart ?");
- }
- }
- </script>
+  <h1>💖 Always Here for You</h1>
+  <div class="grid">
+    <a href="pages/sad.html">
+      <div class="card">
+        <div class="emoji">💧</div>
+        <h3>I'm Feeling Sad</h3>
+        <p>Comforting messages and soft music.</p>
+      </div>
+    </a>
+
+    <a href="pages/angry.html">
+      <div class="card">
+        <div class="emoji">😡</div>
+        <h3>I'm Angry</h3>
+        <p>Rant space, calm video, words to breathe.</p>
+      </div>
+    </a>
+
+    <a href="pages/miss.html">
+      <div class="card">
+        <div class="emoji">😢</div>
+        <h3>I Miss You</h3>
+        <p>Countdown, songs, and your love note.</p>
+      </div>
+    </a>
+
+    <a href="pages/happy.html">
+      <div class="card">
+        <div class="emoji">😄</div>
+        <h3>I'm Happy!</h3>
+        <p>Celebrate moments with joy & confetti!</p>
+      </div>
+    </a>
+
+    <a href="pages/achievement.html">
+      <div class="card">
+        <div class="emoji">🏆</div>
+        <h3>I Did It!</h3>
+        <p>Fireworks, praise, and your cheer squad.</p>
+      </div>
+    </a>
+
+    <a href="pages/sleep.html">
+      <div class="card">
+        <div class="emoji">💤</div>
+        <h3>I Can't Sleep</h3>
+        <p>Lullabies or your voice — sweet dreams.</p>
+      </div>
+    </a>
+
+    <a href="pages/hug.html">
+      <div class="card">
+        <div class="emoji">🫂</div>
+        <h3>I Need a Hug</h3>
+        <p>Virtual hugs and warm messages.</p>
+      </div>
+    </a>
+
+    <a href="pages/anxious.html">
+      <div class="card">
+        <div class="emoji">🌩️</div>
+        <h3>I Feel Anxious</h3>
+        <p>Breathing tools and grounding support.</p>
+      </div>
+    </a>
+
+    <a href="pages/memories.html">
+      <div class="card">
+        <div class="emoji">📖</div>
+        <h3>Remember When?</h3>
+        <p>Our scrapbook of shared love.</p>
+      </div>
+    </a>
+
+    <a href="pages/graduation.html">
+      <div class="card">
+        <div class="emoji">🎓</div>
+        <h3>Graduation</h3>
+        <p>Celebrating your journey and growth.</p>
+      </div>
+    </a>
+
+    <a href="pages/birthday.html">
+      <div class="card">
+        <div class="emoji">🎂</div>
+        <h3>Birthday</h3>
+        <p>Secret message and video gift.</p>
+      </div>
+    </a>
+
+    <a href="pages/anniversary.html">
+      <div class="card">
+        <div class="emoji">🗓️</div>
+        <h3>Anniversary</h3>
+        <p>Reflection, joy, and sweet promises.</p>
+      </div>
+    </a>
+
+    <a href="pages/holiday.html">
+      <div class="card">
+        <div class="emoji">🎄</div>
+        <h3>Holiday Page</h3>
+        <p>Seasonal love messages for you.</p>
+      </div>
+    </a>
+
+    <a href="pages/future.html">
+      <div class="card">
+        <div class="emoji">🌟</div>
+        <h3>Future You</h3>
+        <p>Letter to your future, filled with hope.</p>
+      </div>
+    </a>
+
+    <a href="pages/guessing.html">
+      <div class="card">
+        <div class="emoji">❓</div>
+        <h3>Guessing Game</h3>
+        <p>Guess cute memories & moments.</p>
+      </div>
+    </a>
+
+    <a href="pages/open-when.html">
+      <div class="card">
+        <div class="emoji">💌</div>
+        <h3>Open When Letters</h3>
+        <p>Letters for every feeling or need.</p>
+      </div>
+    </a>
+
+    <a href="pages/memory-game.html">
+      <div class="card">
+        <div class="emoji">🧠</div>
+        <h3>Memory Game</h3>
+        <p>Match our magical moments.</p>
+      </div>
+    </a>
+
+    <a href="pages/mini-games.html">
+      <div class="card">
+        <div class="emoji">🕹️</div>
+        <h3>Mini Games</h3>
+        <p>Tic-tac-toe, maze, or trivia love!</p>
+      </div>
+    </a>
+
+    <a href="pages/travel.html">
+      <div class="card">
+        <div class="emoji">🌍</div>
+        <h3>Travel Dreams</h3>
+        <p>Pin places we dream of visiting.</p>
+      </div>
+    </a>
+
+    <a href="pages/playlist.html">
+      <div class="card">
+        <div class="emoji">🎵</div>
+        <h3>Shared Playlist</h3>
+        <p>Our songs, our story, our love.</p>
+      </div>
+    </a>
+
+    <a href="pages/advice.html">
+      <div class="card">
+        <div class="emoji">🧭</div>
+        <h3>Advice Box</h3>
+        <p>Pull quotes & love-guided advice.</p>
+      </div>
+    </a>
+  </div>
+
+  <footer>
+    Made with 💗 just for you — from your person.
+  </footer>
 </body>
 </html>
-<!-- dashboard.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Your Safe Space</title>
- <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="style <style>
- body {
- font-family: 'Dancing Script', cursive;
- background-color: #ffe6f0;
- text-align: center;
- padding: 50px;
- }
- h1 {
- font-size: 3em;
- color: #d6336c;
- }
- .button-grid {
- display: grid;
- grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
- gap: 20px;
- margin-top: 30px;
- }
- .button {
- background-color: #fff0f5;
- border: 2px solid #d6336c;
- padding: 20px;
- border-radius: 20px;
- text-decoration: none;
- color: #d6336c;
- font-size: 1.2em;
- transition: transform 0.3s;
- }
- .button:hover {
- background-color: #ffd6e0;
- transform: scale(1.05);
- }
- </style>
-</head>
-<body>
- <h1>Welcome, My Love ?</h1>
- <p>Choose how you're feeling today or what you're celebrating</p>
- <div class="button-grid">
- <a class="button" href="pages/sad.html">I'm Feeling Sad ?</a>
- <a class="button" href="pages/happy.html">I'm Happy ?</a>
- <a class="button" href="pages/angry.html">I'm Angry ?</a>
- <a class="button" href="pages/achieved.html">I Did It! ?</a>
- </div>
- <!-- Optional Background Music -->
- <!-- ADD FILE: /media/music/soft-theme.mp3 -->
- <audio autoplay loop hidden>
- <source src="media/music/soft-theme.mp3" type="audio/mp3" />
- </audio>
-</body>
-</html>
-<!-- pages/sad.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
- <meta charset="UTF-8">
- <title>Sad Moments</title>
- <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet"> <style>
- body {
- background-color: #cce7ff;
- font-family: 'Handlee', cursive;
- text-align: center;
- padding: 50px;
- }
- .message {
- font-size: 1.8em;
- color: #003366;
- margin-bottom: 40px;
- }
- .back {
- text-decoration: none;
- background: #0066cc;
- color: white;
- padding: 10px 20px;
- border-radius: 15px;
- }
- </style>
-</head>
-<body>
- <div class="message">
- Hey you, yes you.<br><br>
- I know today?s heavy. But I?m here. And I believe in you even on your worst days.<br><br>
- You?ve made it this far, and you will get through this too. Let me hold your sadness with  </div>
- <!-- ADD FILE: /media/audio/sad-voice.mp3 -->
- <audio controls>
- <source src="../media/audio/sad-voice.mp3" type="audio/mp3">
- </audio>
- <br><br>
- <a class="back" href="../dashboard.html">? Back to Dashboard</a>
-</body>
-</html>
-<!-- pages/happy.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
- <meta charset="UTF-8">
- <title>Happy Moments</title>
- <style>
- body {
- background-color: #fff5cc;
- font-family: 'Dancing Script', cursive;
- text-align: center;
- padding: 50px;
- color: #cc6600;
- }
- .message {
- font-size: 2em;
- margin-bottom: 30px;
- }
- .confetti {
- font-size: 3em;
- animation: float 1s ease-in-out infinite alternate;
- }
- @keyframes float {
- from { transform: translateY(0); }
- to { transform: translateY(-10px); }
- }
- </style>
-</head>
-<body>
- <div class="confetti">???</div>
- <div class="message">
- I'm so happy you're happy!<br><br>
- Moments like these are the sunshine of our lives.<br>
- Promise me you'll always smile like this.<br><br>
- Save this joy inside you, and sprinkle it everywhere ?
- </div>
- <a href="../dashboard.html">? Back to Dashboard</a>
-</body>
-</html>
-<!-- pages/angry.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
- <meta charset="UTF-8">
- <title>When You're Angry</title>
- <style>
- body {
- background-color: #ffe0e0;
- font-family: Arial, sans-serif;
- text-align: center;
- padding: 50px;
- color: #aa0000;
- }
- .box {
- font-size: 1.5em;
- margin-bottom: 30px;
- }
- .breath {
- font-size: 2em;
- animation: breathe 4s infinite;
- }
- @keyframes breathe {
- 0% { transform: scale(1); }
- 50% { transform: scale(1.2); }
- 100% { transform: scale(1); }
- }
- </style>
-</head>
-<body>
- <div class="box">
- It's okay to be angry.<br><br>
- But don?t let the fire inside burn *you* too.<br><br>
- You?re allowed to feel things. Let?s breathe together. In... out... ?
- </div>
- <div class="breath">?</div>
- <br>
- <a href="../dashboard.html">? Back to Dashboard</a>
-</body>
-</html>
-<!-- pages/achieved.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
- <meta charset="UTF-8">
- <title>You Did It!</title>
- <style>
- body {
- background-color: #e6ffe6;
- font-family: 'Dancing Script', cursive;
- text-align: center;
- padding: 50px;
- color: #2e8b57;
- }
- .big {
- font-size: 2.5em;
- font-weight: bold;
- }
- .small {
- font-size: 1.5em;
- margin-top: 30px;
- }
- </style>
-</head>
-<body>
- <div class="big">YOU DID IT!!! ?</div>
- <div class="small">
- I?m bursting with pride right now.<br><br>
- Whether it?s small or huge ? *you achieved it.*<br>
- Remember this feeling. You?re capable of anything. And I?ll always be cheering.
- </div>
- <!-- ADD FILE: /media/video/congrats-video.mp4 -->
- <video width="300" controls>
- <source src="../media/video/congrats-video.mp4" type="video/mp4">
- </video>
- <br><br>
- <a href="../dashboard.html">? Back to Dashboard</a>
-</body>
-</html>
-<!-- Media folder structure notes -->
-media/
-??? audio/
-? ??? sad-voice.mp3 ? a soft message you record for her
-??? music/
-? ??? soft-theme.mp3 ? calm background loop (optional)
-??? video/
- ??? congrats-video.mp4 ? a short clip of you celebrating her
+
