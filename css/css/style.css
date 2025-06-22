@@ -1,220 +1,92 @@
-/* Base Reset */
-* {
-  box-sizing: border-box;
+body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-/* Body & Layout */
-body {
-  background: linear-gradient(to right, #ffddee, #d0e8ff);
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(120deg, #ffe4ec, #ffe0f0, #fef6ff);
+  animation: backgroundShift 20s infinite alternate;
   color: #333;
-  padding: 20px;
-  min-height: 100vh;
 }
 
-/* Lock Screen */
-#lock-screen {
-  position: fixed;
-  inset: 0;
-  background: white;
+@keyframes backgroundShift {
+  0% { background-position: 0 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  text-align: center;
+}
+
+.title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.8em;
+  color: #cc2b5e;
+  margin-bottom: 20px;
+}
+
+.buttons {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  z-index: 999;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
-#lock-screen input {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #aaa;
-  margin-top: 10px;
-  font-size: 1rem;
-}
-
-#lock-screen button {
-  background-color: #f06292;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
+button {
+  background: #ffb6c1;
   border: none;
-  font-weight: bold;
-  margin-top: 10px;
+  padding: 12px 20px;
+  font-size: 1.1em;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
-#lock-screen button:hover {
-  background-color: #e91e63;
-}
-
-#error-message {
-  color: red;
-  margin-top: 10px;
-}
-
-/* Header */
-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-#liveTime {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* Navigation */
-nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  list-style: none;
-  padding: 10px 0;
-}
-
-nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  background: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-nav a:hover {
-  background: #f4f4f4;
-}
-
-/* Sections */
-section {
-  margin: 40px 0;
-  padding: 20px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-h2 {
-  margin-bottom: 10px;
-  font-size: 1.5rem;
-}
-
-/* Mood Tracker */
-#moodForm label {
-  margin-right: 10px;
-  display: inline-block;
-}
-
-#mood-display {
-  margin-top: 10px;
-  font-style: italic;
-}
-
-/* Gallery */
-.gallery {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.gallery img {
-  width: 150px;
-  height: auto;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.gallery img:hover {
+button:hover {
+  background: #ff85a2;
   transform: scale(1.05);
 }
 
-/* Message Box */
-#loveMessage {
+.feeling-content {
+  animation: fadeIn 1s ease-in-out;
+  margin-bottom: 40px;
+}
+
+.feeling-content img {
+  max-width: 300px;
+  border-radius: 15px;
+  margin-top: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.diary-title {
+  font-size: 1.8em;
+  color: #cc2b5e;
+  margin-top: 50px;
+}
+
+textarea {
   width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #aaa;
-  margin-bottom: 10px;
+  height: 200px;
+  font-size: 1em;
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-family: 'Quicksand', sans-serif;
+  margin-bottom: 15px;
 }
 
-#sendMessage {
-  padding: 8px 16px;
-  background: #4CAF50;
-  color: white;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-}
-
-/* Quote Generator */
-#quoteDisplay {
+#saveMessage {
+  color: green;
+  font-weight: bold;
   margin-top: 10px;
-  font-style: italic;
 }
 
-/* Confetti Button */
-#confettiBtn {
-  padding: 10px 16px;
-  background: #2196F3;
-  color: white;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-}
-
-canvas#confettiCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 999;
-}
-
-/* Guessing Game */
-#guessInput {
-  padding: 8px;
-  width: 60%;
-  margin: 10px 0;
-  border-radius: 6px;
-  border: 1px solid #aaa;
-}
-
-#guessBtn {
-  padding: 8px 14px;
-  background: #673AB7;
-  color: white;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
-
-/* Card Memory Grid */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 80px);
-  gap: 10px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.card {
-  background: #ffe4e1;
-  border-radius: 10px;
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80px;
-  cursor: pointer;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  margin-top: 60px;
-  color: #777;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
