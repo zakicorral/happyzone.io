@@ -10,21 +10,17 @@
       margin: 0;
       padding: 0;
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(135deg, #ffe4ec, #f3d1f4);
-      animation: backgroundShift 20s infinite alternate;
-      background-size: 400% 400%;
-    }
-    @keyframes backgroundShift {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+      background: url('moon.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fdf0f7;
     }
     .lock-screen, .main-content {
       max-width: 900px;
       margin: auto;
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      background-color: white;
+      box-shadow: 0 4px 20px rgba(255,255,255,0.2);
+      background-color: rgba(0, 0, 0, 0.6);
       margin-top: 50px;
       animation: fadeIn 1.2s ease-in-out;
     }
@@ -32,7 +28,7 @@
     .title {
       font-family: 'Great Vibes', cursive;
       font-size: 2.8em;
-      color: #cc2b5e;
+      color: #ffcad4;
       text-align: center;
       margin-bottom: 30px;
     }
@@ -44,17 +40,18 @@
       margin-bottom: 30px;
     }
     button {
-      background: #ffb6c1;
-      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #ffc0cb;
+      color: #ffeef5;
       padding: 12px 20px;
       font-size: 1.1em;
-      border-radius: 20px;
+      border-radius: 50px;
       cursor: pointer;
       transition: 0.3s;
     }
     button:hover {
-      background-color: #ff85a2;
-      transform: scale(1.05);
+      background-color: #ffc0cb;
+      color: #3b3b3b;
     }
     .feeling-content {
       text-align: center;
@@ -72,20 +69,23 @@
       padding: 15px;
       font-size: 1em;
       border-radius: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid #ffc0cb;
       resize: none;
       margin-bottom: 10px;
+      background: #fff0f5;
+      color: #3b3b3b;
     }
     .entry {
-      background-color: #ffeef5;
+      background-color: #fff0f52e;
       border: 1px solid #ffcce0;
       border-radius: 15px;
       padding: 10px;
       margin-top: 15px;
+      color: #ffffff;
     }
     .date-label {
       font-size: 0.9em;
-      color: #777;
+      color: #ddd;
       margin-bottom: 5px;
     }
     .unlock-btn {
@@ -112,7 +112,7 @@
     <p style="text-align:center">Enter the secret word to unlock your special place 🌸</p>
     <input type="password" id="password" placeholder="Password is 'happiness'" />
     <button class="unlock-btn" onclick="unlockSite()">Unlock</button>
-    <p id="errorMsg" style="color:red;text-align:center;"></p>
+    <p id="errorMsg" style="color:#ffc0cb;text-align:center;"></p>
   </div>
 
   <div class="main-content hidden" id="mainContent">
@@ -129,10 +129,15 @@
       <button onclick="showFeeling('motivated')">Motivated 💪</button>
     </div>
     <div id="feelingContent" class="feeling-content"></div>
-    <h2 class="title">📝 Your Personal Diary</h2>
-    <textarea id="diaryEntry" placeholder="Write your heart here..."></textarea>
-    <button onclick="saveDiary()">Save Entry</button>
-    <div id="diaryHistory"></div>
+    <div style="text-align: center; margin-top: 40px;">
+      <button onclick="toggleDiary()">📖 My Diary</button>
+    </div>
+    <div id="diarySection" class="hidden">
+      <h2 class="title">📝 Your Personal Diary</h2>
+      <textarea id="diaryEntry" placeholder="Write your heart here..."></textarea>
+      <button onclick="saveDiary()">Save Entry</button>
+      <div id="diaryHistory"></div>
+    </div>
   </div>
 
   <script>
@@ -166,6 +171,11 @@
       area.innerHTML = `<p style='font-size:1.2em;'>${f.msg}</p><img src="${f.img}" alt="${type}" />`;
     }
 
+    function toggleDiary() {
+      const section = document.getElementById("diarySection");
+      section.classList.toggle("hidden");
+    }
+
     function saveDiary() {
       const text = document.getElementById("diaryEntry").value.trim();
       if (!text) return alert("Write something first ✍️");
@@ -191,3 +201,4 @@
   </script>
 </body>
 </html>
+
