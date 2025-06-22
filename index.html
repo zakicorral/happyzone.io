@@ -3,115 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For You, Always 💖</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>For You, My Love 💖</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="container">
+    <h1 class="title">How Are You Feeling Today, Beautiful? 🌸</h1>
 
-  <!-- 🔐 Lock Screen -->
-  <div id="lock-screen">
-    <h2>🔒 Enter Password to Continue</h2>
-    <input type="password" id="passwordInput" placeholder="Enter password..." />
-    <button id="unlockBtn">Enter</button>
-    <p id="error-message"></p>
+    <div class="buttons">
+      <button onclick="showFeeling('happy')">I'm feeling Happy 😊</button>
+      <button onclick="showFeeling('sad')">I'm feeling Sad 😢</button>
+      <button onclick="showFeeling('angry')">I'm feeling Angry 😡</button>
+      <button onclick="showFeeling('loved')">I feel Loved 💕</button>
+      <button onclick="showFeeling('bored')">I'm feeling Bored 💤</button>
+    </div>
+
+    <div id="feelingContent" class="feeling-content"></div>
+
+    <h2 class="diary-title">📝 Your Personal Diary</h2>
+    <textarea id="diary" placeholder="Write whatever is in your heart..."></textarea>
+    <button onclick="saveDiary()">Save Letter</button>
+    <p id="saveMessage"></p>
   </div>
 
-  <!-- 🌸 Main Content (Hidden by default) -->
-  <div id="page-content" style="display: none;">
-    <header>
-      <h1>💖 For You, Always</h1>
-      <p id="liveTime"></p>
-    </header>
-
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#mood-tracker">Mood</a></li>
-        <li><a href="#memory-gallery">Gallery</a></li>
-        <li><a href="#message-box">Message</a></li>
-        <li><a href="#quote-gen">Quotes</a></li>
-        <li><a href="#games">Games</a></li>
-      </ul>
-    </nav>
-
-    <!-- 🌤️ Mood Tracker -->
-    <section id="mood-tracker">
-      <h2>🗓️ How Are You Feeling?</h2>
-      <form id="moodForm">
-        <label><input type="radio" name="mood" value="Happy"> Happy 😄</label>
-        <label><input type="radio" name="mood" value="Sad"> Sad 😢</label>
-        <label><input type="radio" name="mood" value="Anxious"> Anxious 😰</label>
-        <label><input type="radio" name="mood" value="Angry"> Angry 😡</label>
-        <label><input type="radio" name="mood" value="Loved"> Loved 💕</label>
-        <button type="submit">Save Mood</button>
-      </form>
-      <p id="mood-display"></p>
-    </section>
-
-    <!-- 📸 Memory Gallery -->
-    <section id="memory-gallery">
-      <h2>📖 Favorite Memories</h2>
-      <div class="gallery">
-        <img src="images/memory1.jpg" alt="Memory 1" class="popup-image">
-        <img src="images/memory2.jpg" alt="Memory 2" class="popup-image">
-        <img src="images/memory3.jpg" alt="Memory 3" class="popup-image">
-      </div>
-    </section>
-
-    <!-- 💌 Leave a Message -->
-    <section id="message-box">
-      <h2>📝 Leave a Love Note</h2>
-      <textarea id="loveMessage" rows="5" placeholder="Write something sweet..."></textarea>
-      <button id="sendMessage">Send Message</button>
-      <p id="lastMessage"></p>
-    </section>
-
-    <!-- ✨ Random Quote Generator -->
-    <section id="quote-gen">
-      <h2>🌸 Love Quote Generator</h2>
-      <button id="newQuote">Show me a quote</button>
-      <blockquote id="quoteDisplay">"Click the button for a random quote!"</blockquote>
-    </section>
-
-    <!-- 🎉 Confetti Celebration -->
-    <section id="celebration">
-      <h2>🎉 Let's Celebrate</h2>
-      <button id="confettiBtn">Throw Confetti!</button>
-      <canvas id="confettiCanvas"></canvas>
-    </section>
-
-    <!-- ❓ Guessing Game -->
-    <section id="games">
-      <h2>❓ Guess the Memory</h2>
-      <p>“What’s the city where we first called each other babe?”</p>
-      <input type="text" id="guessInput" placeholder="Your answer..." />
-      <button id="guessBtn">Guess</button>
-      <p id="guessResult"></p>
-    </section>
-
-    <!-- 🧠 Memory Match Grid -->
-    <section id="memory-cards">
-      <h2>🧠 Match Our Moments</h2>
-      <div class="card-grid">
-        <div class="card">❤️</div>
-        <div class="card">🎵</div>
-        <div class="card">📖</div>
-        <div class="card">🧸</div>
-        <div class="card">❤️</div>
-        <div class="card">🎵</div>
-        <div class="card">📖</div>
-        <div class="card">🧸</div>
-      </div>
-    </section>
-
-    <!-- 🛑 End -->
-    <footer>
-      <p>&copy; 2025 Always made with 💗 for you.</p>
-    </footer>
-  </div>
-
-  <!-- 👇 Script File -->
-  <script src="js/script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
