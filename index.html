@@ -10,7 +10,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Quicksand', sans-serif;
-      background: url('moon.jpeg') no-repeat center center fixed;
+      background: url('moon.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #fdf0f7;
     }
@@ -64,11 +64,6 @@
     .feeling-content.show {
       opacity: 1;
     }
-    .feeling-content img {
-      max-width: 300px;
-      border-radius: 20px;
-      margin-top: 20px;
-    }
     textarea {
       width: 100%;
       height: 200px;
@@ -76,7 +71,6 @@
       font-size: 1.2em;
       border-radius: 20px;
       border: none;
-      background: url('https://i.imgur.com/XdzreS1.png') center/cover no-repeat;
       background-color: #fff0f5;
       color: #3b3b3b;
       box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
@@ -94,7 +88,7 @@
       color: #ddd;
       margin-bottom: 5px;
     }
-    .unlock-btn, .diary-btn {
+    .unlock-btn, .diary-btn, .zaki-btn {
       margin-top: 15px;
       padding: 10px 20px;
       background-color: #ff91a4;
@@ -103,7 +97,7 @@
       border-radius: 10px;
       cursor: pointer;
     }
-    .unlock-btn:hover, .diary-btn:hover {
+    .unlock-btn:hover, .diary-btn:hover, .zaki-btn:hover {
       background-color: #ff6389;
     }
     @keyframes fadeIn {
@@ -113,9 +107,9 @@
     #password {
       display: block;
       margin: 20px auto;
-      padding: 15px;
-      font-size: 1.2em;
-      width: 60%;
+      padding: 20px;
+      font-size: 1.4em;
+      width: 70%;
       border-radius: 15px;
       border: none;
       text-align: center;
@@ -135,7 +129,8 @@
     <h1 class="title">Choose an Option</h1>
     <div class="buttons">
       <button onclick="toggleFeelings()">💖 My Feelings</button>
-      <button class="diary-btn" onclick="toggleDiary()">📖</button>
+      <button class="diary-btn" onclick="toggleDiary()">📖 My Diary</button>
+      <button class="zaki-btn">💬 Talk to Zaki</button>
     </div>
     <div id="feelingsPanel" class="hidden">
       <div class="buttons">
@@ -162,15 +157,15 @@
   <script>
     const diaryKey = 'loveDiaryEntries';
     const feelings = {
-      happy: { msg: "I'm so happy you're smiling today! 💖", img: "https://i.imgur.com/ZgGvJtY.png" },
-      sad: { msg: "It's okay to feel down. I'm here for you always 💗", img: "https://i.imgur.com/3vKiFPL.png" },
-      angry: { msg: "Take a deep breath, love. You're stronger than your anger ❤️", img: "https://i.imgur.com/Kv5nyQl.png" },
-      loved: { msg: "You're so deeply loved, today and every day 💞", img: "https://i.imgur.com/uE5VLCp.png" },
-      bored: { msg: "Let’s create some magic to kill the boredom ✨", img: "https://i.imgur.com/jjZ2MkT.png" },
-      anxious: { msg: "You're safe. Take a breath. I'm right here 🤗", img: "https://i.imgur.com/BYW6v6Z.png" },
-      excited: { msg: "Yay! Let's celebrate together! 🎉", img: "https://i.imgur.com/E3vUjcB.png" },
-      tired: { msg: "You deserve rest. Go easy on yourself 💆‍♀️", img: "https://i.imgur.com/O3E4mjH.png" },
-      motivated: { msg: "You’re on fire today! Go chase your dreams! 🔥", img: "https://i.imgur.com/lydvZ5H.png" }
+      happy: { msg: "I'm so happy you're smiling today! 💖" },
+      sad: { msg: "It's okay to feel down. I'm here for you always 💗" },
+      angry: { msg: "Take a deep breath, love. You're stronger than your anger ❤️" },
+      loved: { msg: "You're so deeply loved, today and every day 💞" },
+      bored: { msg: "Let’s create some magic to kill the boredom ✨" },
+      anxious: { msg: "You're safe. Take a breath. I'm right here 🤗" },
+      excited: { msg: "Yay! Let's celebrate together! 🎉" },
+      tired: { msg: "You deserve rest. Go easy on yourself 💆‍♀️" },
+      motivated: { msg: "You’re on fire today! Go chase your dreams! 🔥" }
     };
 
     function unlockSite() {
@@ -199,7 +194,7 @@
       const f = feelings[type];
       area.classList.remove("show");
       setTimeout(() => {
-        area.innerHTML = `<p style='font-size:1.2em;'>${f.msg}</p><img src="${f.img}" alt="${type}" />`;
+        area.innerHTML = `<p style='font-size:1.2em;'>${f.msg}</p>`;
         area.classList.add("show");
         autoAddFeelingToDiary(type);
       }, 100);
