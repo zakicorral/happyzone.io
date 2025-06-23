@@ -6,6 +6,7 @@
   <title>For You, My Love 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&family=Great+Vibes&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <style>
+    /* same styles as before, minus .fav-star */
     body {
       margin: 0;
       padding: 0;
@@ -19,10 +20,8 @@
       margin: auto;
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(255,255,255,0.2);
       background-color: rgba(0, 0, 0, 0.6);
       margin-top: 50px;
-      animation: fadeIn 1.2s ease-in-out;
     }
     .hidden { display: none; }
     .title {
@@ -30,152 +29,78 @@
       font-size: 2.8em;
       color: #ffcad4;
       text-align: center;
-      margin-bottom: 30px;
     }
     .buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 10px;
       justify-content: center;
-      margin-bottom: 30px;
-      animation: fadeIn 1.5s ease-in-out;
+      margin: 20px 0;
     }
     button {
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid #ffc0cb;
-      color: #ffeef5;
+      background: #ffb6c1;
+      border: none;
+      color: #fff;
       padding: 12px 20px;
       font-size: 1.1em;
-      border-radius: 50px;
+      border-radius: 25px;
       cursor: pointer;
-      transition: all 0.4s ease;
     }
-    button:hover {
-      background-color: #ffc0cb;
-      color: #3b3b3b;
-      transform: scale(1.05);
-    }
-    .entry {
-      background-color: #fff0f52e;
-      border: 1px solid #ffcce0;
-      border-radius: 15px;
-      padding: 15px 20px;
-      margin-top: 15px;
-      color: #ffffff;
-      position: relative;
-      box-shadow: 0 0 10px rgba(255, 192, 203, 0.3);
-    }
-    .entry:hover {
-      transform: scale(1.02);
-    }
-    .fav-star {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5em;
-      cursor: pointer;
-      color: #ffc0cb;
-    }
-    .favorited {
-      color: gold !important;
-    }
-    .date-label {
-      font-size: 0.9em;
-      color: #ccc;
-      margin-bottom: 5px;
-      font-style: italic;
-    }
-    .diary-card {
+    .entry-group {
       background-color: rgba(255, 255, 255, 0.1);
       padding: 20px;
       border-radius: 15px;
       margin-top: 20px;
     }
-    .unlock-btn, .diary-btn, .zaki-btn {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: #ff91a4;
-      color: white;
-      border: none;
+    .entry {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 10px 15px;
       border-radius: 10px;
-      cursor: pointer;
+      margin: 10px 0;
     }
-    .unlock-btn:hover, .diary-btn:hover, .zaki-btn:hover {
-      background-color: #ff6389;
+    .entry h4 {
+      margin: 5px 0;
+      font-weight: bold;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    #password {
-      display: block;
-      margin: 20px auto;
-      padding: 20px;
-      font-size: 1.4em;
-      width: 70%;
-      border-radius: 15px;
-      border: none;
-      text-align: center;
-    }
-    .prompt-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .prompt-form input, .prompt-form textarea {
-      font-size: 1em;
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-    }
-    .prompt-form textarea {
-      height: 120px;
+    .entry .time {
+      font-size: 0.8em;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
   <div class="lock-screen" id="lockScreen">
     <h2 class="title">Welcome, Love 💖</h2>
-    <p style="text-align:center">Enter the secret word to unlock your special place 🌸</p>
     <input type="password" id="password" placeholder="Password is 'happiness'" />
-    <button class="unlock-btn" onclick="unlockSite()">Unlock</button>
+    <button onclick="unlockSite()">Unlock</button>
     <p id="errorMsg" style="color:#ffc0cb;text-align:center;"></p>
   </div>
-
   <div class="main-content hidden" id="mainContent">
-    <h1 class="title">Choose an Option</h1>
+    <h1 class="title">Choose What You Need</h1>
     <div class="buttons">
-      <button onclick="toggleFeelings()">💖 My Feelings</button>
-      <button class="diary-btn" onclick="toggleDiary()">📖 My Diary</button>
-      <button class="zaki-btn">💬 Talk to Zaki</button>
+      <button onclick="toggleFeelings()">💝 Reflect Feelings</button>
+      <button onclick="toggleDiary()">📓 Write a Memory</button>
+      <button onclick="alert('Coming soon: Zaki's messages 📲')">💬 Zaki's Corner</button>
     </div>
     <div id="feelingsPanel" class="hidden">
       <div class="buttons">
-        <button onclick="showFeeling('happy')">Happy 😊</button>
-        <button onclick="showFeeling('sad')">Sad 😢</button>
-        <button onclick="showFeeling('angry')">Angry 😡</button>
-        <button onclick="showFeeling('loved')">Loved 💕</button>
-        <button onclick="showFeeling('bored')">Bored 😴</button>
-        <button onclick="showFeeling('anxious')">Anxious 😰</button>
-        <button onclick="showFeeling('excited')">Excited 🤩</button>
-        <button onclick="showFeeling('tired')">Tired 😴</button>
-        <button onclick="showFeeling('motivated')">Motivated 💪</button>
+        <button onclick="logFeeling('happy')">Happy</button>
+        <button onclick="logFeeling('sad')">Sad</button>
+        <button onclick="logFeeling('angry')">Angry</button>
+        <button onclick="logFeeling('loved')">Loved</button>
       </div>
     </div>
-    <div id="feelingContent" class="feeling-content"></div>
     <div id="diarySection" class="hidden">
-      <h2 class="title">📝 Your Personal Diary</h2>
-      <div class="prompt-form">
-        <input id="diaryTitle" type="text" placeholder="Give today a title..." />
-        <textarea id="diaryEntry" placeholder="Write what's on your heart..."></textarea>
-        <button onclick="saveDiary()">Save Entry</button>
-      </div>
+      <input id="diaryTitle" placeholder="Title for today..." />
+      <textarea id="diaryEntry" placeholder="Write here..."></textarea>
+      <button onclick="saveDiary()">Save</button>
       <div id="diaryHistory"></div>
     </div>
   </div>
 
   <script>
     const diaryKey = 'loveDiaryEntries';
+
     function unlockSite() {
       const pass = document.getElementById("password").value;
       if (pass.toLowerCase() === "happiness") {
@@ -183,77 +108,83 @@
         document.getElementById("mainContent").classList.remove("hidden");
         loadDiary();
       } else {
-        document.getElementById("errorMsg").innerText = "Wrong password, try again 💔";
+        document.getElementById("errorMsg").innerText = "Wrong password, love 😞";
       }
     }
+
     function toggleDiary() {
-      const section = document.getElementById("diarySection");
-      section.classList.toggle("hidden");
+      document.getElementById("diarySection").classList.toggle("hidden");
     }
+
     function toggleFeelings() {
-      const panel = document.getElementById("feelingsPanel");
-      panel.classList.toggle("hidden");
+      document.getElementById("feelingsPanel").classList.toggle("hidden");
     }
-    function showFeeling(type) {
-      const messages = {
-        happy: "I'm so happy you're smiling today! 💖",
-        sad: "It's okay to feel down. I'm here for you always 💗",
-        angry: "Take a deep breath, love. You're stronger than your anger ❤️",
-        loved: "You're so deeply loved, today and every day 💞",
-        bored: "Let’s create some magic to kill the boredom ✨",
-        anxious: "You're safe. Take a breath. I'm right here 🤗",
-        excited: "Yay! Let's celebrate together! 🎉",
-        tired: "You deserve rest. Go easy on yourself 💆‍♀️",
-        motivated: "You’re on fire today! Go chase your dreams! 🔥"
+
+    function logFeeling(type) {
+      const text = `Ibtissem is feeling ${type} today.`;
+      const date = new Date();
+      const entry = {
+        title: `Feeling: ${type}`,
+        text,
+        timestamp: date.toISOString()
       };
-      const area = document.getElementById("feelingContent");
-      area.classList.remove("show");
-      setTimeout(() => {
-        area.innerHTML = `<p style='font-size:1.2em;'>${messages[type]}</p>`;
-        area.classList.add("show");
-        saveFeelingAutoEntry(type);
-      }, 100);
-    }
-    function saveFeelingAutoEntry(type) {
-      const now = new Date().toLocaleString();
-      const entry = { date: now, title: `Feeling: ${type}`, text: `Ibtissem is feeling ${type} today.`, favorite: false };
       const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-      entries.unshift(entry);
+      entries.push(entry);
       localStorage.setItem(diaryKey, JSON.stringify(entries));
       loadDiary();
     }
+
     function saveDiary() {
       const title = document.getElementById("diaryTitle").value.trim() || "Untitled";
       const text = document.getElementById("diaryEntry").value.trim();
-      if (!text) return alert("Write something first ✍️");
-      const date = new Date().toLocaleString();
-      const entry = { date, title, text, favorite: false };
+      if (!text) return alert("Please write something.");
+      const date = new Date();
+      const entry = {
+        title,
+        text,
+        timestamp: date.toISOString()
+      };
       const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-      entries.unshift(entry);
+      entries.push(entry);
       localStorage.setItem(diaryKey, JSON.stringify(entries));
       document.getElementById("diaryTitle").value = "";
       document.getElementById("diaryEntry").value = "";
       loadDiary();
     }
-    function toggleFavorite(index) {
-      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-      entries[index].favorite = !entries[index].favorite;
-      localStorage.setItem(diaryKey, JSON.stringify(entries));
-      loadDiary();
-    }
+
     function loadDiary() {
       const history = document.getElementById("diaryHistory");
       const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-      history.innerHTML = entries.map((e, i) => `
-        <div class='entry'>
-          <div class='fav-star ${e.favorite ? 'favorited' : ''}' onclick='toggleFavorite(${i})'>⭐</div>
-          <div class='date-label'>${e.date}</div>
-          <h3 style='margin: 5px 0;'>${e.title || 'Untitled'}</h3>
-          <p>${e.text}</p>
-        </div>
-      `).join('');
+      const grouped = {};
+
+      entries.forEach(e => {
+        const day = new Date(e.timestamp).toLocaleDateString();
+        if (!grouped[day]) grouped[day] = [];
+        grouped[day].push(e);
+      });
+
+      history.innerHTML = Object.keys(grouped).reverse().map(date => {
+        const dayEntries = grouped[date].map(e => {
+          const time = new Date(e.timestamp).toLocaleTimeString();
+          return `
+            <div class="entry">
+              <h4>${e.title}</h4>
+              <p class="time">${time}</p>
+              <p>${e.text}</p>
+            </div>
+          `;
+        }).join("");
+
+        return `
+          <div class="entry-group">
+            <h3>${date}</h3>
+            ${dayEntries}
+          </div>
+        `;
+      }).join("");
     }
   </script>
 </body>
 </html>
+
 
