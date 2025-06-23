@@ -55,26 +55,6 @@
       color: #3b3b3b;
       transform: scale(1.05);
     }
-    .feeling-content {
-      text-align: center;
-      margin-top: 30px;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .feeling-content.show {
-      opacity: 1;
-    }
-    textarea {
-      width: 100%;
-      height: 200px;
-      padding: 30px;
-      font-size: 1.2em;
-      border-radius: 20px;
-      border: none;
-      background-color: #fff0f5;
-      color: #3b3b3b;
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
-    }
     .entry {
       background-color: #fff0f52e;
       border: 1px solid #ffcce0;
@@ -84,16 +64,9 @@
       color: #ffffff;
       position: relative;
       box-shadow: 0 0 10px rgba(255, 192, 203, 0.3);
-      transition: transform 0.3s ease;
     }
     .entry:hover {
       transform: scale(1.02);
-    }
-    .date-label {
-      font-size: 0.85em;
-      color: #ddd;
-      margin-bottom: 8px;
-      font-style: italic;
     }
     .fav-star {
       position: absolute;
@@ -103,8 +76,20 @@
       cursor: pointer;
       color: #ffc0cb;
     }
-    .fav-star.favorited {
-      color: gold;
+    .favorited {
+      color: gold !important;
+    }
+    .date-label {
+      font-size: 0.9em;
+      color: #ccc;
+      margin-bottom: 5px;
+      font-style: italic;
+    }
+    .diary-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 20px;
     }
     .unlock-btn, .diary-btn, .zaki-btn {
       margin-top: 15px;
@@ -131,6 +116,20 @@
       border-radius: 15px;
       border: none;
       text-align: center;
+    }
+    .prompt-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .prompt-form input, .prompt-form textarea {
+      font-size: 1em;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+    }
+    .prompt-form textarea {
+      height: 120px;
     }
   </style>
 </head>
@@ -166,26 +165,17 @@
     <div id="feelingContent" class="feeling-content"></div>
     <div id="diarySection" class="hidden">
       <h2 class="title">📝 Your Personal Diary</h2>
-      <textarea id="diaryEntry" placeholder="Write your heart here..."></textarea>
-      <button onclick="saveDiary()">Save Entry</button>
+      <div class="prompt-form">
+        <input id="diaryTitle" type="text" placeholder="Give today a title..." />
+        <textarea id="diaryEntry" placeholder="Write what's on your heart..."></textarea>
+        <button onclick="saveDiary()">Save Entry</button>
+      </div>
       <div id="diaryHistory"></div>
     </div>
   </div>
 
   <script>
     const diaryKey = 'loveDiaryEntries';
-    const feelings = {
-      happy: { msg: "I'm so happy you're smiling today! 💖" },
-      sad: { msg: "It's okay to feel down. I'm here for you always 💗" },
-      angry: { msg: "Take a deep breath, love. You're stronger than your anger ❤️" },
-      loved: { msg: "You're so deeply loved, today and every day 💞" },
-      bored: { msg: "Let’s create some magic to kill the boredom ✨" },
-      anxious: { msg: "You're safe. Take a breath. I'm right here 🤗" },
-      excited: { msg: "Yay! Let's celebrate together! 🎉" },
-      tired: { msg: "You deserve rest. Go easy on yourself 💆‍♀️" },
-      motivated: { msg: "You’re on fire today! Go chase your dreams! 🔥" }
-    };
-
     function unlockSite() {
       const pass = document.getElementById("password").value;
       if (pass.toLowerCase() === "happiness") {
@@ -196,57 +186,61 @@
         document.getElementById("errorMsg").innerText = "Wrong password, try again 💔";
       }
     }
-
     function toggleDiary() {
       const section = document.getElementById("diarySection");
       section.classList.toggle("hidden");
     }
-
     function toggleFeelings() {
       const panel = document.getElementById("feelingsPanel");
       panel.classList.toggle("hidden");
     }
-
     function showFeeling(type) {
+      const messages = {
+        happy: "I'm so happy you're smiling today! 💖",
+        sad: "It's okay to feel down. I'm here for you always 💗",
+        angry: "Take a deep breath, love. You're stronger than your anger ❤️",
+        loved: "You're so deeply loved, today and every day 💞",
+        bored: "Let’s create some magic to kill the boredom ✨",
+        anxious: "You're safe. Take a breath. I'm right here 🤗",
+        excited: "Yay! Let's celebrate together! 🎉",
+        tired: "You deserve rest. Go easy on yourself 💆‍♀️",
+        motivated: "You’re on fire today! Go chase your dreams! 🔥"
+      };
       const area = document.getElementById("feelingContent");
-      const f = feelings[type];
       area.classList.remove("show");
       setTimeout(() => {
-        area.innerHTML = `<p style='font-size:1.2em;'>${f.msg}</p>`;
+        area.innerHTML = `<p style='font-size:1.2em;'>${messages[type]}</p>`;
         area.classList.add("show");
-        autoAddFeelingToDiary(type);
+        saveFeelingAutoEntry(type);
       }, 100);
     }
-
-    function autoAddFeelingToDiary(type) {
+    function saveFeelingAutoEntry(type) {
       const now = new Date().toLocaleString();
-      const line = `Ibtissem is feeling ${type} today.`;
-      const entry = { date: now, text: line, favorite: false };
-      let entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
+      const entry = { date: now, title: `Feeling: ${type}`, text: `Ibtissem is feeling ${type} today.`, favorite: false };
+      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
       entries.unshift(entry);
       localStorage.setItem(diaryKey, JSON.stringify(entries));
       loadDiary();
     }
-
     function saveDiary() {
+      const title = document.getElementById("diaryTitle").value.trim() || "Untitled";
       const text = document.getElementById("diaryEntry").value.trim();
       if (!text) return alert("Write something first ✍️");
       const date = new Date().toLocaleString();
-      const entry = { date, text, favorite: false };
-      let entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
+      const entry = { date, title, text, favorite: false };
+      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
       entries.unshift(entry);
       localStorage.setItem(diaryKey, JSON.stringify(entries));
+      document.getElementById("diaryTitle").value = "";
       document.getElementById("diaryEntry").value = "";
       loadDiary();
     }
-
     function toggleFavorite(index) {
-      let entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
+      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
       entries[index].favorite = !entries[index].favorite;
       localStorage.setItem(diaryKey, JSON.stringify(entries));
       loadDiary();
     }
-
     function loadDiary() {
       const history = document.getElementById("diaryHistory");
       const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
@@ -254,9 +248,10 @@
         <div class='entry'>
           <div class='fav-star ${e.favorite ? 'favorited' : ''}' onclick='toggleFavorite(${i})'>⭐</div>
           <div class='date-label'>${e.date}</div>
-          <div>${e.text}</div>
+          <h3 style='margin: 5px 0;'>${e.title || 'Untitled'}</h3>
+          <p>${e.text}</p>
         </div>
-      `).join("");
+      `).join('');
     }
   </script>
 </body>
