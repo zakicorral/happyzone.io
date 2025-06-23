@@ -79,14 +79,32 @@
       background-color: #fff0f52e;
       border: 1px solid #ffcce0;
       border-radius: 15px;
-      padding: 10px;
+      padding: 15px 20px;
       margin-top: 15px;
       color: #ffffff;
+      position: relative;
+      box-shadow: 0 0 10px rgba(255, 192, 203, 0.3);
+      transition: transform 0.3s ease;
+    }
+    .entry:hover {
+      transform: scale(1.02);
     }
     .date-label {
-      font-size: 0.9em;
+      font-size: 0.85em;
       color: #ddd;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+    .fav-star {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #ffc0cb;
+    }
+    .fav-star.favorited {
+      color: gold;
     }
     .unlock-btn, .diary-btn, .zaki-btn {
       margin-top: 15px;
@@ -203,7 +221,7 @@
     function autoAddFeelingToDiary(type) {
       const now = new Date().toLocaleString();
       const line = `Ibtissem is feeling ${type} today.`;
-      const entry = { date: now, text: line };
+      const entry = { date: now, text: line, favorite: false };
       let entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
       entries.unshift(entry);
       localStorage.setItem(diaryKey, JSON.stringify(entries));
@@ -214,7 +232,7 @@
       const text = document.getElementById("diaryEntry").value.trim();
       if (!text) return alert("Write something first ✍️");
       const date = new Date().toLocaleString();
-      const entry = { date, text };
+      const entry = { date, text, favorite: false };
       let entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
       entries.unshift(entry);
       localStorage.setItem(diaryKey, JSON.stringify(entries));
@@ -222,11 +240,19 @@
       loadDiary();
     }
 
+    function toggleFavorite(index) {
+      let entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
+      entries[index].favorite = !entries[index].favorite;
+      localStorage.setItem(diaryKey, JSON.stringify(entries));
+      loadDiary();
+    }
+
     function loadDiary() {
       const history = document.getElementById("diaryHistory");
       const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-      history.innerHTML = entries.map(e => `
+      history.innerHTML = entries.map((e, i) => `
         <div class='entry'>
+          <div class='fav-star ${e.favorite ? 'favorited' : ''}' onclick='toggleFavorite(${i})'>⭐</div>
           <div class='date-label'>${e.date}</div>
           <div>${e.text}</div>
         </div>
