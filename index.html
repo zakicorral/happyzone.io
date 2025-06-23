@@ -64,20 +64,10 @@
       color: #ffffff;
       position: relative;
       box-shadow: 0 0 10px rgba(255, 192, 203, 0.3);
+      cursor: pointer;
     }
     .entry:hover {
       transform: scale(1.02);
-    }
-    .fav-star {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5em;
-      cursor: pointer;
-      color: #ffc0cb;
-    }
-    .favorited {
-      color: gold !important;
     }
     .date-label {
       font-size: 0.9em;
@@ -131,6 +121,35 @@
     .prompt-form textarea {
       height: 120px;
     }
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background-color: #2c2c2c;
+      color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 90%;
+    }
+    .modal-close {
+      background-color: #ff91a4;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      float: right;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -146,8 +165,8 @@
     <h1 class="title">Choose an Option</h1>
     <div class="buttons">
       <button onclick="toggleFeelings()">💖 My Feelings</button>
-      <button class="diary-btn" onclick="toggleDiary()">📖 My Diary</button>
-      <button class="zaki-btn">💬 Talk to Zaki</button>
+      <button class="diary-btn" onclick="toggleDiary()">📓 My Diary</button>
+      <button class="zaki-btn" onclick="alert('Coming soon: A lovely chat with Zaki ❤️')">💬 Talk to Zaki</button>
     </div>
     <div id="feelingsPanel" class="hidden">
       <div class="buttons">
@@ -174,8 +193,17 @@
     </div>
   </div>
 
+  <div id="diaryModal" class="modal hidden">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">Close</button>
+      <h2 id="modalTitle"></h2>
+      <p id="modalText"></p>
+    </div>
+  </div>
+
   <script>
     const diaryKey = 'loveDiaryEntries';
+
     function unlockSite() {
       const pass = document.getElementById("password").value;
       if (pass.toLowerCase() === "happiness") {
@@ -186,14 +214,15 @@
         document.getElementById("errorMsg").innerText = "Wrong password, try again 💔";
       }
     }
+
     function toggleDiary() {
-      const section = document.getElementById("diarySection");
-      section.classList.toggle("hidden");
+      document.getElementById("diarySection").classList.toggle("hidden");
     }
+
     function toggleFeelings() {
-      const panel = document.getElementById("feelingsPanel");
-      panel.classList.toggle("hidden");
+      document.getElementById("feelingsPanel").classList.toggle("hidden");
     }
+
     function showFeeling(type) {
       const messages = {
         happy: "I'm so happy you're smiling today! 💖",
@@ -201,33 +230,31 @@
         angry: "Take a deep breath, love. You're stronger than your anger ❤️",
         loved: "You're so deeply loved, today and every day 💞",
         bored: "Let’s create some magic to kill the boredom ✨",
-        anxious: "You're safe. Take a breath. I'm right here 🤗",
+        anxious: "You're safe. Take a breath. I'm right here 🧷",
         excited: "Yay! Let's celebrate together! 🎉",
         tired: "You deserve rest. Go easy on yourself 💆‍♀️",
         motivated: "You’re on fire today! Go chase your dreams! 🔥"
       };
       const area = document.getElementById("feelingContent");
-      area.classList.remove("show");
-      setTimeout(() => {
-        area.innerHTML = `<p style='font-size:1.2em;'>${messages[type]}</p>`;
-        area.classList.add("show");
-        saveFeelingAutoEntry(type);
-      }, 100);
+      area.innerHTML = `<p style='font-size:1.2em;'>${messages[type]}</p>`;
+      saveFeelingAutoEntry(type);
     }
+
     function saveFeelingAutoEntry(type) {
       const now = new Date().toLocaleString();
-      const entry = { date: now, title: `Feeling: ${type}`, text: `Ibtissem is feeling ${type} today.`, favorite: false };
+      const entry = { date: now, title: `Feeling: ${type}`, text: `Ibtissem is feeling ${type} today.` };
       const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
       entries.unshift(entry);
       localStorage.setItem(diaryKey, JSON.stringify(entries));
       loadDiary();
     }
+
     function saveDiary() {
       const title = document.getElementById("diaryTitle").value.trim() || "Untitled";
       const text = document.getElementById("diaryEntry").value.trim();
       if (!text) return alert("Write something first ✍️");
       const date = new Date().toLocaleString();
-      const entry = { date, title, text, favorite: false };
+      const entry = { date, title, text };
       const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
       entries.unshift(entry);
       localStorage.setItem(diaryKey, JSON.stringify(entries));
@@ -235,27 +262,29 @@
       document.getElementById("diaryEntry").value = "";
       loadDiary();
     }
-    function toggleFavorite(index) {
-      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-      entries[index].favorite = !entries[index].favorite;
-      localStorage.setItem(diaryKey, JSON.stringify(entries));
-      loadDiary();
-    }
+
     function loadDiary() {
       const history = document.getElementById("diaryHistory");
       const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
       history.innerHTML = entries.map((e, i) => `
-        <div class='entry'>
-          <div class='fav-star ${e.favorite ? 'favorited' : ''}' onclick='toggleFavorite(${i})'>⭐</div>
+        <div class='entry' onclick='openModal(${i})'>
           <div class='date-label'>${e.date}</div>
-          <h3 style='margin: 5px 0;'>${e.title || 'Untitled'}</h3>
-          <p>${e.text}</p>
+          <h3>${e.title || 'Untitled'}</h3>
         </div>
       `).join('');
+    }
+
+    function openModal(index) {
+      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
+      const entry = entries[index];
+      document.getElementById("modalTitle").innerText = entry.title;
+      document.getElementById("modalText").innerText = entry.text;
+      document.getElementById("diaryModal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("diaryModal").classList.add("hidden");
     }
   </script>
 </body>
 </html>
-
-
-
