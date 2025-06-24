@@ -163,84 +163,25 @@
       float: right;
       cursor: pointer;
     }
+    .entry-buttons {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
   </style>
 </head>
 <body>
-  <div class="lock-screen" id="lockScreen">
-    <h2 class="title">Welcome, Love 💖</h2>
-    <p style="text-align:center">Enter the secret word to unlock your special place 🌸</p>
-    <input type="password" id="password" placeholder="Password is 'happiness'" />
-    <button class="unlock-btn" onclick="unlockSite()">Unlock</button>
-    <p id="errorMsg" style="color:#ffc0cb;text-align:center;"></p>
-  </div>
-
-  <div class="main-content hidden" id="mainContent">
-    <h1 class="title">Choose an Option</h1>
-    <div class="buttons">
-      <button class="diary-btn" onclick="toggleDiary()">📓 My Diary</button>
-      <a href="button.html">
-        <button class="zaki-btn">💬 Talk to Zaki</button>
-      </a>
-    </div>
-    <div id="diarySection" class="hidden">
-      <h2 class="title">📝 Your Personal Diary</h2>
-      <div class="prompt-form">
-        <input id="diaryTitle" type="text" placeholder="Give today a title..." />
-        <select id="diaryFeeling">
-          <option value="happy">#happy</option>
-          <option value="sad">#sad</option>
-          <option value="anxious">#anxious</option>
-          <option value="excited">#excited</option>
-          <option value="grateful">#grateful</option>
-        </select>
-        <textarea id="diaryEntry" placeholder="Write what's on your heart..."></textarea>
-        <button onclick="saveDiary()">Save Entry</button>
-      </div>
-      <div id="diaryHistory"></div>
-    </div>
-  </div>
-
-  <div id="diaryModal" class="modal hidden">
+  <!-- existing content -->
+  <div id="deleteConfirm" class="modal hidden">
     <div class="modal-content">
-      <button class="modal-close" onclick="closeModal()">Close</button>
-      <h2 id="modalTitle"></h2>
-      <p id="modalText"></p>
-      <p id="modalFeeling" class="feeling-tag"></p>
+      <p style="font-size:1.2em;">Are you sure, cutie? 🥺 <br>*puppy eyes*</p>
+      <button class="modal-close" onclick="cancelDelete()">No</button>
+      <button class="modal-close" onclick="confirmDelete()">Yes</button>
     </div>
   </div>
 
   <script>
-    const diaryKey = 'loveDiaryEntries';
-
-    function unlockSite() {
-      const pass = document.getElementById("password").value;
-      if (pass.toLowerCase() === "happiness") {
-        document.getElementById("lockScreen").classList.add("hidden");
-        document.getElementById("mainContent").classList.remove("hidden");
-        loadDiary();
-      } else {
-        document.getElementById("errorMsg").innerText = "Wrong password, try again 💔";
-      }
-    }
-
-    function toggleDiary() {
-      document.getElementById("diarySection").classList.toggle("hidden");
-    }
-
-    function saveDiary() {
-      const title = document.getElementById("diaryTitle").value.trim() || "Untitled";
-      const text = document.getElementById("diaryEntry").value.trim();
-      const feeling = document.getElementById("diaryFeeling").value;
-      if (!text) return alert("Write something first ✍️");
-      const date = new Date().toLocaleString();
-      const entry = { date, title, text, feeling };
-      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-      entries.unshift(entry);
-      localStorage.setItem(diaryKey, JSON.stringify(entries));
-      document.getElementById("diaryTitle").value = "";
-      document.getElementById("diaryEntry").value = "";
-      loadDiary();
-    }
+    let deleteIndex = null;
 
     function loadDiary() {
       const history = document.getElementById("diaryHistory");
@@ -250,24 +191,45 @@
           <div class='date-label'>${e.date}</div>
           <h3>${e.title || 'Untitled'}</h3>
           <div class='feeling-tag'>#${e.feeling}</div>
+          <div class='entry-buttons'>
+            <button onclick='event.stopPropagation(); editEntry(${i})'>Edit</button>
+            <button onclick='event.stopPropagation(); confirmDeletePopup(${i})'>Delete</button>
+          </div>
         </div>
       `).join('');
     }
 
-    function openModal(index) {
-      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-      const entry = entries[index];
-      document.getElementById("modalTitle").innerText = entry.title;
-      document.getElementById("modalText").innerText = entry.text;
-      document.getElementById("modalFeeling").innerText = `#${entry.feeling}`;
-      document.getElementById("diaryModal").classList.remove("hidden");
+    function confirmDeletePopup(index) {
+      deleteIndex = index;
+      document.getElementById("deleteConfirm").classList.remove("hidden");
     }
 
-    function closeModal() {
-      document.getElementById("diaryModal").classList.add("hidden");
-      document.getElementById("modalTitle").innerText = "";
-      document.getElementById("modalText").innerText = "";
-      document.getElementById("modalFeeling").innerText = "";
+    function cancelDelete() {
+      deleteIndex = null;
+      document.getElementById("deleteConfirm").classList.add("hidden");
+    }
+
+    function confirmDelete() {
+      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
+      if (deleteIndex !== null) {
+        entries.splice(deleteIndex, 1);
+        localStorage.setItem(diaryKey, JSON.stringify(entries));
+        loadDiary();
+        cancelDelete();
+      }
+    }
+
+    function editEntry(index) {
+      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
+      const entry = entries[index];
+      document.getElementById("diaryTitle").value = entry.title;
+      document.getElementById("diaryEntry").value = entry.text;
+      document.getElementById("diaryFeeling").value = entry.feeling;
+      entries.splice(index, 1);
+      localStorage.setItem(diaryKey, JSON.stringify(entries));
+      loadDiary();
+      document.getElementById("diarySection").classList.remove("hidden");
+      window.scrollTo({ top: document.getElementById("diarySection").offsetTop, behavior: 'smooth' });
     }
   </script>
 </body>
