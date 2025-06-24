@@ -76,6 +76,15 @@
       margin-bottom: 5px;
       font-style: italic;
     }
+    .feeling-tag {
+      font-size: 0.8em;
+      background-color: #ff91a4;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-top: 5px;
+    }
     .diary-card {
       background-color: rgba(255, 255, 255, 0.1);
       padding: 20px;
@@ -113,7 +122,7 @@
       flex-direction: column;
       gap: 10px;
     }
-    .prompt-form input, .prompt-form textarea {
+    .prompt-form input, .prompt-form textarea, .prompt-form select {
       font-size: 1em;
       padding: 10px;
       border-radius: 10px;
@@ -168,30 +177,22 @@
   <div class="main-content hidden" id="mainContent">
     <h1 class="title">Choose an Option</h1>
     <div class="buttons">
-      <button onclick="toggleFeelings()">💖 My Feelings</button>
       <button class="diary-btn" onclick="toggleDiary()">📓 My Diary</button>
       <a href="button.html">
-  <button class="zaki-btn">💬 Talk to Zaki</button>
-</a>
+        <button class="zaki-btn">💬 Talk to Zaki</button>
+      </a>
     </div>
-    <div id="feelingsPanel" class="hidden">
-      <div class="buttons">
-        <button onclick="showFeeling('happy')">Happy 😊</button>
-        <button onclick="showFeeling('sad')">Sad 😢</button>
-        <button onclick="showFeeling('angry')">Angry 😡</button>
-        <button onclick="showFeeling('loved')">Loved 💕</button>
-        <button onclick="showFeeling('bored')">Bored 😴</button>
-        <button onclick="showFeeling('anxious')">Anxious 😰</button>
-        <button onclick="showFeeling('excited')">Excited 🤩</button>
-        <button onclick="showFeeling('tired')">Tired 😴</button>
-        <button onclick="showFeeling('motivated')">Motivated 💪</button>
-      </div>
-    </div>
-    <div id="feelingContent" class="feeling-content"></div>
     <div id="diarySection" class="hidden">
       <h2 class="title">📝 Your Personal Diary</h2>
       <div class="prompt-form">
         <input id="diaryTitle" type="text" placeholder="Give today a title..." />
+        <select id="diaryFeeling">
+          <option value="happy">#happy</option>
+          <option value="sad">#sad</option>
+          <option value="anxious">#anxious</option>
+          <option value="excited">#excited</option>
+          <option value="grateful">#grateful</option>
+        </select>
         <textarea id="diaryEntry" placeholder="Write what's on your heart..."></textarea>
         <button onclick="saveDiary()">Save Entry</button>
       </div>
@@ -204,6 +205,7 @@
       <button class="modal-close" onclick="closeModal()">Close</button>
       <h2 id="modalTitle"></h2>
       <p id="modalText"></p>
+      <p id="modalFeeling" class="feeling-tag"></p>
     </div>
   </div>
 
@@ -225,42 +227,13 @@
       document.getElementById("diarySection").classList.toggle("hidden");
     }
 
-    function toggleFeelings() {
-      document.getElementById("feelingsPanel").classList.toggle("hidden");
-    }
-
-    function showFeeling(type) {
-      const messages = {
-        happy: "I'm so happy you're smiling today! 💖",
-        sad: "It's okay to feel down. I'm here for you always 💗",
-        angry: "Take a deep breath, love. You're stronger than your anger ❤️",
-        loved: "You're so deeply loved, today and every day 💞",
-        bored: "Let’s create some magic to kill the boredom ✨",
-        anxious: "You're safe. Take a breath. I'm right here 🧷",
-        excited: "Yay! Let's celebrate together! 🎉",
-        tired: "You deserve rest. Go easy on yourself 💆‍♀️",
-        motivated: "You’re on fire today! Go chase your dreams! 🔥"
-      };
-      const area = document.getElementById("feelingContent");
-      area.innerHTML = `<p style='font-size:1.2em;'>${messages[type]}</p>`;
-      saveFeelingAutoEntry(type);
-    }
-
-    function saveFeelingAutoEntry(type) {
-      const now = new Date().toLocaleString();
-      const entry = { date: now, title: `Feeling: ${type}`, text: `Ibtissem is feeling ${type} today.` };
-      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-      entries.unshift(entry);
-      localStorage.setItem(diaryKey, JSON.stringify(entries));
-      loadDiary();
-    }
-
     function saveDiary() {
       const title = document.getElementById("diaryTitle").value.trim() || "Untitled";
       const text = document.getElementById("diaryEntry").value.trim();
+      const feeling = document.getElementById("diaryFeeling").value;
       if (!text) return alert("Write something first ✍️");
       const date = new Date().toLocaleString();
-      const entry = { date, title, text };
+      const entry = { date, title, text, feeling };
       const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
       entries.unshift(entry);
       localStorage.setItem(diaryKey, JSON.stringify(entries));
@@ -276,6 +249,7 @@
         <div class='entry' onclick='openModal(${i})'>
           <div class='date-label'>${e.date}</div>
           <h3>${e.title || 'Untitled'}</h3>
+          <div class='feeling-tag'>#${e.feeling}</div>
         </div>
       `).join('');
     }
@@ -285,6 +259,7 @@
       const entry = entries[index];
       document.getElementById("modalTitle").innerText = entry.title;
       document.getElementById("modalText").innerText = entry.text;
+      document.getElementById("modalFeeling").innerText = `#${entry.feeling}`;
       document.getElementById("diaryModal").classList.remove("hidden");
     }
 
@@ -292,6 +267,7 @@
       document.getElementById("diaryModal").classList.add("hidden");
       document.getElementById("modalTitle").innerText = "";
       document.getElementById("modalText").innerText = "";
+      document.getElementById("modalFeeling").innerText = "";
     }
   </script>
 </body>
