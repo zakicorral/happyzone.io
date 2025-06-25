@@ -79,7 +79,7 @@
     .feeling-tag {
       font-size: 0.8em;
       background-color: #ff91a4;
-      color: #ffba24;
+      color: white;
       padding: 2px 8px;
       border-radius: 10px;
       display: inline-block;
@@ -203,6 +203,30 @@
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+    .coming-soon {
+  background: linear-gradient(270deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
+  background-size: 600% 600%;
+  border: 2px solid #ffffff30;
+  color: white;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 50px;
+  animation: rainbowAnimation 10s ease infinite;
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.coming-soon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes rainbowAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
   </style>
 </head>
@@ -218,6 +242,7 @@
   <div class="main-content hidden" id="mainContent">
     <h1 class="title">Choose an Option</h1>
     <div class="buttons">
+      <button class="coming-soon rainbow-shine"> Coming Soon...</button>
       <button class="diary-btn" onclick="toggleDiary()">📓 My Diary</button>
       <a href="button.html">
         <button class="zaki-btn">💬 The Love Jar</button>
