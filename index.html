@@ -158,11 +158,26 @@
       background-color: #ff91a4;
       border: none;
       color: white;
+    
       padding: 8px 16px;
       border-radius: 8px;
       float: right;
       cursor: pointer;
     }
+    .entry button {
+  margin-right: 10px;
+  background-color: #ff91a4;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+.entry button:hover {
+  background-color: #ff6389;
+}
+
   </style>
 </head>
 <body>
@@ -227,32 +242,53 @@
       document.getElementById("diarySection").classList.toggle("hidden");
     }
 
-    function saveDiary() {
-      const title = document.getElementById("diaryTitle").value.trim() || "Untitled";
-      const text = document.getElementById("diaryEntry").value.trim();
-      const feeling = document.getElementById("diaryFeeling").value;
-      if (!text) return alert("Write something first ✍️");
-      const date = new Date().toLocaleString();
-      const entry = { date, title, text, feeling };
-      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-      entries.unshift(entry);
-      localStorage.setItem(diaryKey, JSON.stringify(entries));
-      document.getElementById("diaryTitle").value = "";
-      document.getElementById("diaryEntry").value = "";
-      loadDiary();
-    }
+   function saveDiary() {
+  const title = document.getElementById("diaryTitle").value.trim() || "Untitled";
+  const text = document.getElementById("diaryEntry").value.trim();
+  const feeling = document.getElementById("diaryFeeling").value;
+  if (!text) return alert("Write something first ✍️");
+
+  const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
+
+  if (editingIndex !== null) {
+    // Edit existing entry
+    entries[editingIndex] = {
+      ...entries[editingIndex],
+      title,
+      text,
+      feeling
+    };
+    editingIndex = null;
+  } else {
+    // New entry
+    const date = new Date().toLocaleString();
+    entries.unshift({ date, title, text, feeling });
+  }
+
+  localStorage.setItem(diaryKey, JSON.stringify(entries));
+  document.getElementById("diaryTitle").value = "";
+  document.getElementById("diaryEntry").value = "";
+  loadDiary();
+}
+
 
     function loadDiary() {
-      const history = document.getElementById("diaryHistory");
-      const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-      history.innerHTML = entries.map((e, i) => `
-        <div class='entry' onclick='openModal(${i})'>
-          <div class='date-label'>${e.date}</div>
-          <h3>${e.title || 'Untitled'}</h3>
-          <div class='feeling-tag'>#${e.feeling}</div>
-        </div>
-      `).join('');
-    }
+  const history = document.getElementById("diaryHistory");
+  const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
+  history.innerHTML = entries.map((e, i) => `
+    <div class='entry'>
+      <div class='date-label'>${e.date}</div>
+      <h3>${e.title || 'Untitled'}</h3>
+      <p>${e.text}</p>
+      <div class='feeling-tag'>#${e.feeling}</div>
+      <div style="margin-top:10px;">
+        <button onclick="editDiary(${i})">✏️ Edit</button>
+        <button onclick="deleteDiary(${i})">🗑️ Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
 
     function openModal(index) {
       const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
@@ -269,6 +305,27 @@
       document.getElementById("modalText").innerText = "";
       document.getElementById("modalFeeling").innerText = "";
     }
+
+    let editingIndex = null;
+
+function editDiary(index) {
+  const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
+  const entry = entries[index];
+  document.getElementById("diaryTitle").value = entry.title;
+  document.getElementById("diaryEntry").value = entry.text;
+  document.getElementById("diaryFeeling").value = entry.feeling;
+  editingIndex = index;
+}
+
+function deleteDiary(index) {
+  const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
+  if (confirm("Are you sure you want to delete this entry? 💔")) {
+    entries.splice(index, 1);
+    localStorage.setItem(diaryKey, JSON.stringify(entries));
+    loadDiary();
+  }
+}
+
   </script>
 </body>
 </html>
