@@ -91,7 +91,7 @@
       border-radius: 15px;
       margin-top: 20px;
     }
-    .unlock-btn, .diary-btn, .zaki-btn {
+    .unlock-btn, {
       margin-top: 15px;
       padding: 10px 20px;
       background-color: #ff91a4;
@@ -100,9 +100,28 @@
       border-radius: 10px;
       cursor: pointer;
     }
-    .unlock-btn:hover, .diary-btn:hover, .zaki-btn:hover {
+    .unlock-btn:hover, {
       background-color: #ff6389;
     }
+    .diary-btn, .zaki-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid #ffffff30;
+  color: white;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 1.1em;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.diary-btn:hover, .zaki-btn:hover {
+  background-color: #ffc0cb;
+  color: #3b3b3b;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 192, 203, 0.3);
+}
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
