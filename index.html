@@ -12,7 +12,7 @@
       font-family: 'Quicksand', sans-serif;
       background: url('moon.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: #fdf5e6;
+      color: #fdf0f7;
     }
     .lock-screen, .main-content {
       max-width: 900px;
@@ -43,8 +43,8 @@
     }
     button {
       background: rgba(255, 255, 255, 0.1);
-      border: 2px solid #f4c542;
-      color: #fdf5e6;
+      border: 2px solid #ffc0cb;
+      color: #ffeef5;
       padding: 12px 20px;
       font-size: 1.1em;
       border-radius: 50px;
@@ -52,8 +52,8 @@
       transition: all 0.4s ease;
     }
     button:hover {
-      background-color: #6da96f;
-      color: #FFFFFF;
+      background-color: #ffc0cb;
+      color: #3b3b3b;
       transform: scale(1.05);
     }
     .entry {
@@ -78,8 +78,8 @@
     }
     .feeling-tag {
       font-size: 0.8em;
-      background-color: #f4c542;
-      color: #2a2a2a;
+      background-color: #ff91a4;
+      color: white;
       padding: 2px 8px;
       border-radius: 10px;
       display: inline-block;
@@ -94,15 +94,14 @@
     .unlock-btn, .diary-btn, .zaki-btn {
       margin-top: 15px;
       padding: 10px 20px;
-      background-color: #f4c542;
-      color: #2a2a2a;
+      background-color: #ff91a4;
+      color: white;
       border: none;
       border-radius: 10px;
       cursor: pointer;
     }
     .unlock-btn:hover, .diary-btn:hover, .zaki-btn:hover {
-      background-color: #6da96f;
-      color: white;
+      background-color: #ff6389;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -129,9 +128,9 @@
   font-size: 1.1em;
   padding: 14px 18px;
   border-radius: 15px;
-  border: 2px solid #f4c542;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fdf5e6;
+  border: 2px solid #ffc0cb;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff5f9;
   outline: none;
   transition: 0.3s ease;
   box-shadow: 0 0 5px rgba(255, 192, 203, 0.3);
@@ -189,16 +188,16 @@
     }
     .entry button {
   margin-right: 10px;
-  background-color: #f4c542;
+  background-color: #ff91a4;
   border: none;
-  color: #2a2a2a;
+  color: white;
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.9em;
 }
 .entry button:hover {
-  background-color: #6da96f;
+  background-color: #ff6389;
 }
 .diary-text {
   white-space: pre-wrap;
@@ -302,7 +301,7 @@
     function loadDiary() {
   const history = document.getElementById("diaryHistory");
   const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-  history.innerHTML = entries.map((e, i) => `
+  history.innerHTML = entries.map((e, i) => 
     <div class='entry'>
       <div class='date-label'>${e.date}</div>
       <h3>${e.title || 'Untitled'}</h3>
@@ -313,7 +312,7 @@
         <button onclick="deleteDiary(${i})">🗑️ Delete</button>
       </div>
     </div>
-  `).join('');
+  ).join('');
 }
 
 
@@ -322,7 +321,7 @@
       const entry = entries[index];
       document.getElementById("modalTitle").innerText = entry.title;
       document.getElementById("modalText").innerText = entry.text;
-      document.getElementById("modalFeeling").innerText = `#${entry.feeling}`;
+      document.getElementById("modalFeeling").innerText = #${entry.feeling};
       document.getElementById("diaryModal").classList.remove("hidden");
     }
 
