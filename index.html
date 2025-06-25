@@ -301,7 +301,7 @@
     function loadDiary() {
   const history = document.getElementById("diaryHistory");
   const entries = JSON.parse(localStorage.getItem(diaryKey)) || [];
-  history.innerHTML = entries.map((e, i) => 
+  history.innerHTML = entries.map((e, i) => `
     <div class='entry'>
       <div class='date-label'>${e.date}</div>
       <h3>${e.title || 'Untitled'}</h3>
@@ -312,7 +312,7 @@
         <button onclick="deleteDiary(${i})">🗑️ Delete</button>
       </div>
     </div>
-  ).join('');
+  `).join('');
 }
 
 
@@ -321,7 +321,7 @@
       const entry = entries[index];
       document.getElementById("modalTitle").innerText = entry.title;
       document.getElementById("modalText").innerText = entry.text;
-      document.getElementById("modalFeeling").innerText = #${entry.feeling};
+      document.getElementById("modalFeeling").innerText = `#${entry.feeling}`;
       document.getElementById("diaryModal").classList.remove("hidden");
     }
 
