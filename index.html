@@ -122,12 +122,34 @@
       flex-direction: column;
       gap: 10px;
     }
-    .prompt-form input, .prompt-form textarea, .prompt-form select {
-      font-size: 1em;
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-    }
+    .prompt-form input, 
+.prompt-form textarea, 
+.prompt-form select {
+  font-size: 1.1em;
+  padding: 14px 18px;
+  border-radius: 15px;
+  border: 2px solid #ffc0cb;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff5f9;
+  outline: none;
+  transition: 0.3s ease;
+  box-shadow: 0 0 5px rgba(255, 192, 203, 0.3);
+}
+
+.prompt-form input::placeholder, 
+.prompt-form textarea::placeholder {
+  color: #ffbfd1;
+  font-style: italic;
+}
+
+.prompt-form input:focus, 
+.prompt-form textarea:focus, 
+.prompt-form select:focus {
+  border-color: #ff91a4;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 8px #ff91a4;
+}
+
     .prompt-form textarea {
       height: 120px;
     }
