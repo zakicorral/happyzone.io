@@ -177,6 +177,10 @@
 .entry button:hover {
   background-color: #ff6389;
 }
+.diary-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 
   </style>
 </head>
@@ -184,7 +188,7 @@
   <div class="lock-screen" id="lockScreen">
     <h2 class="title">Welcome, Love 💖</h2>
     <p style="text-align:center">Enter the secret word to unlock your special place 🌸</p>
-    <input type="password" id="password" placeholder="Password is 'happiness'" />
+    <input type="password" id="password" placeholder="Password is 'Happiness'" />
     <button class="unlock-btn" onclick="unlockSite()">Unlock</button>
     <p id="errorMsg" style="color:#ffc0cb;text-align:center;"></p>
   </div>
@@ -279,7 +283,7 @@
     <div class='entry'>
       <div class='date-label'>${e.date}</div>
       <h3>${e.title || 'Untitled'}</h3>
-      <p>${e.text}</p>
+      <p class="diary-text">${e.text}</p>
       <div class='feeling-tag'>#${e.feeling}</div>
       <div style="margin-top:10px;">
         <button onclick="editDiary(${i})">✏️ Edit</button>
