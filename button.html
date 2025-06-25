@@ -20,6 +20,19 @@
       align-items: center;
       justify-content: flex-start;
       padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(#ffc0cb 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.2;
+      z-index: 0;
     }
 
     h1 {
@@ -27,16 +40,17 @@
       font-size: 3em;
       color: #ff6f91;
       margin-bottom: 20px;
+      z-index: 2;
     }
 
     .jar-container {
       position: relative;
-      width: 200px;
-      height: 300px;
+      width: 280px;
+      height: 400px;
       background: url('lovejar.png') no-repeat center/contain;
       cursor: pointer;
       animation: float 3s ease-in-out infinite;
-      z-index: 1;
+      z-index: 2;
     }
 
     @keyframes float {
@@ -53,6 +67,7 @@
       max-width: 400px;
       width: 100%;
       position: relative;
+      z-index: 2;
     }
 
     .add-form textarea {
@@ -125,7 +140,45 @@
         opacity: 1;
       }
       100% {
-        transform: translate(100px, -200px) scale(0.5);
+        transform: translate(-50px, -150px) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff91a4;
+      transform: rotate(45deg);
+      animation: heartExplode 1.5s ease-out forwards;
+      z-index: 1;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff91a4;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes heartExplode {
+      0% {
+        transform: scale(1) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(1.2) rotate(45deg);
         opacity: 0;
       }
     }
@@ -133,7 +186,7 @@
 </head>
 <body>
   <h1>Our Love Jar 💌</h1>
-  <div class="jar-container" onclick="popNote()"></div>
+  <div class="jar-container" onclick="popNote(); createFloatingHearts(event)"></div>
   <div class="add-form">
     <textarea id="noteText" placeholder="Write something sweet..."></textarea>
     <button onclick="addNote()">Add to the Jar</button>
@@ -147,12 +200,10 @@
       const text = textarea.value.trim();
       if (!text) return alert("Write a note first!");
 
-      // Save note to local storage
       const notes = JSON.parse(localStorage.getItem(jarKey)) || [];
       notes.unshift({ text });
       localStorage.setItem(jarKey, JSON.stringify(notes));
 
-      // Create animation element
       const flyingNote = document.createElement('div');
       flyingNote.className = 'flying-note';
       flyingNote.innerText = text;
@@ -161,10 +212,8 @@
       flyingNote.style.top = rect.top + 'px';
       document.body.appendChild(flyingNote);
 
-      // Clear textarea
       textarea.value = '';
 
-      // Remove animation element after done
       setTimeout(() => flyingNote.remove(), 1000);
     }
 
@@ -179,6 +228,24 @@
       document.body.appendChild(popup);
       setTimeout(() => popup.remove(), 4000);
     }
+
+    function createFloatingHearts(e) {
+      for (let i = 0; i < 8; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        const angle = Math.random() * 2 * Math.PI;
+        const radius = Math.random() * 100 + 40;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        heart.style.left = `${e.clientX}px`;
+        heart.style.top = `${e.clientY}px`;
+        heart.style.setProperty('--x', `${x}px`);
+        heart.style.setProperty('--y', `${-y}px`);
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1500);
+      }
+    }
   </script>
 </body>
 </html>
+
